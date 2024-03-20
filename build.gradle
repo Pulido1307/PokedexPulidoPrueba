@@ -1,0 +1,28 @@
+buildscript {
+    ext {
+        compose_ui_version = '1.1.1'
+        vHilt = '2.45'
+        vRoom = '2.5.0'
+        vHiltNavCompose = '1.0.0'
+        vNavCompose = '2.5.3'
+        vRetrofit = '2.9.0'
+        vRetrofitLogInterceptor = '5.0.0-alpha.3'
+        vCoroutines = '1.6.4'
+        vGson = '2.9.1'
+        vPermissions = '0.17.0'
+        vSplash = '1.0.0'
+        vGlide = "4.14.2"
+        okhttp_version = '4.10.0'
+        accompanist_version = '0.17.0'
+        vNavigationComposeAnimated = '1.0.0'
+        accompanist_version = "0.25.0"
+        vPermissions = '0.17.0'
+        vLocation = "21.0.1"
+    }
+}
+plugins {
+    id 'com.android.application' version '8.1.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+    id 'com.android.library' version '8.1.0' apply false
+    id("com.google.dagger.hilt.android") version "2.44" apply false
+}
