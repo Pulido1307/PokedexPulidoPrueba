@@ -4,7 +4,8 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
-import com.antonio.pulido.pokedexpulido.repositories.PokeRepository
+import com.antonio.pulido.pokedexpulido.repositories.data.store.DataStoreRepository
+import com.antonio.pulido.pokedexpulido.repositories.remote.PokeRepository
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.antonio.pulido.web.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,17 +15,43 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val pokeRepository: PokeRepository,
+    private val dataRepository: DataStoreRepository,
     application: Application
 ) : BaseViewModel(application) {
     init {
         initViewState(MainViewState())
+
         getPokeList()
     }
-    
-    fun onEvent(event: MainViewEvent){
-        when(event){
-            is MainViewEvent.onSearchTextChange -> onSearchTexChange(event.search)
+
+    private fun getTheme() = viewModelScope.launch {
+        val state = currentViewState<MainViewState>()
+        dataRepository.getTheme().collect {
+            updateViewState(
+                state.copy(
+                    isDarkMode = it
+                )
+            )
         }
+
+
+    }
+
+    fun onEvent(event: MainViewEvent) {
+        when (event) {
+            is MainViewEvent.OnSearchTextChange -> onSearchTexChange(event.search)
+            is MainViewEvent.OnChageTheme -> onChageTheme()
+        }
+    }
+
+    private fun onChageTheme() = viewModelScope.launch{
+        val state = currentViewState<MainViewState>()
+        dataRepository.setTheme(!state.isDarkMode)
+        updateViewState(
+            state.copy(
+                isDarkMode = !state.isDarkMode
+            )
+        )
     }
 
     private fun onSearchTexChange(search: String) {
@@ -53,10 +80,13 @@ class MainViewModel @Inject constructor(
                 is NetworkResult.Success -> {
                     updateViewState(
                         state.copy(
-                            pokemones = it.data?.results?: listOf(),
-                            pokemonesFilter =  it.data?.results?: listOf()
-                        )
+                            pokemones = it.data?.results ?: listOf(),
+                            pokemonesFilter = it.data?.results ?: listOf(),
+
+                            )
                     )
+
+                    getTheme()
                 }
             }
         }

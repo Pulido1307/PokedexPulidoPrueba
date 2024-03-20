@@ -10,9 +10,10 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-val Primary = Color(0xFFDEDEFF)
+val PrimaryCard = Color(0xFFDEDEFF)
 val Secondary = Color(0xFF757DE8)
-val TextColor = Color(0xFF000000)
+val TextColor = Color(0xFF757DE8)
 
 val CheckBoxColor = Color(0xFF358790)
-val SurfaceBackground = Color(0xFFF3F4FA)
+val BackgroundLight = Color(0xFFF3F4FA)
+val BackgroundDarks = Color(0xFF5E5C5C)

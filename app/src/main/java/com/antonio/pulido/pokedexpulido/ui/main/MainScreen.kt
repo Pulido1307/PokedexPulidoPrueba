@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -33,11 +35,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
 import com.antonio.pulido.pokedexpulido.ui.composables.TextFieldSearch
+import com.antonio.pulido.pokedexpulido.ui.composables.dialogs.LoadingDialog
 import com.antonio.pulido.pokedexpulido.ui.composables.nav.BottomNavigation
 import com.antonio.pulido.pokedexpulido.ui.composables.scaffold.CustomScaffoldWithNav
 import com.antonio.pulido.pokedexpulido.ui.main.composable.PokeCard
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
-import com.antonio.pulido.pokedexpulido.ui.theme.Primary
+import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
 @Composable
@@ -49,17 +52,18 @@ fun MainScreen(
 
     val uiState by viewModel.getState<MainViewState>().collectAsState()
 
+    LoadingDialog(isVisible = uiState.isLoading)
     CustomScaffoldWithNav(currentRoute = Screens.MAIN, navController = navController) {
         Column(
-            modifier = modifier
-                .fillMaxSize()
+            modifier = modifier.fillMaxSize()
         ) {
             Box(
                 modifier = modifier
                     .fillMaxHeight(0.15f)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
-                    .background(Primary)
+//                    .background(MaterialTheme.colorScheme.surface)
+                    .background(PrimaryCard)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.logo),
@@ -72,7 +76,9 @@ fun MainScreen(
                         .align(Alignment.Center)
                 )
 
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    viewModel.onEvent(MainViewEvent.OnChageTheme)
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.twotone_wb_sunny_24),
                         contentDescription = null,
@@ -95,14 +101,11 @@ fun MainScreen(
 
                     Box(modifier = modifier.weight(1f)) {
 
-                        TextFieldSearch(
-                            value = uiState.searchText ?: "",
-                            onValueTextChange = {
-                                viewModel.onEvent(
-                                    MainViewEvent.onSearchTextChange(it)
-                                )
-                            }
-                        )
+                        TextFieldSearch(value = uiState.searchText ?: "", onValueTextChange = {
+                            viewModel.onEvent(
+                                MainViewEvent.OnSearchTextChange(it)
+                            )
+                        })
                     }
                     IconButton(onClick = {
 //                        viewModel.onEvent(PropertiesViewEvent.ShowDialogFilter)
@@ -115,11 +118,24 @@ fun MainScreen(
                 }
             }
 
+            Spacer(modifier = modifier.height(16.dp))
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2)
             ) {
                 items(uiState.pokemonesFilter) {
-                    PokeCard(url = it.url, nombre = it.name)
+                    val parts = it.url.split("/")
+
+                    val id = parts[parts.size - 2].toInt()
+                    PokeCard(id = id, nombre = it.name, onClick = {
+                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                            "id", id ?: 0
+                        )
+
+                        navController.navigate(Screens.INFO)
+                    })
+
+
                 }
             }
         }

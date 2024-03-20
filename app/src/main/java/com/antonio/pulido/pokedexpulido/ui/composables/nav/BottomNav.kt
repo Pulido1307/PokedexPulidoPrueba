@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
+import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.ui.theme.CheckBoxColor
-import com.antonio.pulido.pokedexpulido.ui.theme.Primary
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
-import com.antonio.pulido.pokedexpulido.ui.theme.SurfaceBackground
+
 
 data class NavigationItem(
     val title: String,
@@ -29,11 +29,13 @@ data class NavigationItem(
 private val items = listOf<NavigationItem>(
     NavigationItem(
         title = "Pokemones",
-        icon = R.drawable.twotone_catching_pokemon_24
+        icon = R.drawable.twotone_catching_pokemon_24,
+        route = Screens.MAIN
     ),
     NavigationItem(
         title = "Favoritos",
-        icon = R.drawable.twotone_favorite_24
+        icon = R.drawable.twotone_favorite_24,
+        route = Screens.FAVS
     )
 )
 
@@ -43,8 +45,8 @@ fun BottomNavigation(
     navController: NavController
 ) {
     NavigationBar(
-        containerColor = Primary,
-        contentColor = Primary,
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.background,
     ) {
         items.forEachIndexed { index, navigationItem ->
             NavigationBarItem(
@@ -67,15 +69,17 @@ fun BottomNavigation(
                 selected = currentRoute == navigationItem.route,
                 onClick = {
                     navigationItem.route?.let {
-
+                        if (currentRoute != it)
+                            navController.navigate(it)
                     }
                 },
+
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = CheckBoxColor,
                     selectedTextColor = CheckBoxColor,
-                    unselectedIconColor = Primary,
-                    unselectedTextColor = Primary,
-                    indicatorColor = SurfaceBackground
+                    unselectedIconColor = MaterialTheme.colorScheme.primary,
+                    unselectedTextColor = MaterialTheme.colorScheme.primary,
+                    indicatorColor = MaterialTheme.colorScheme.background
                 )
             )
         }

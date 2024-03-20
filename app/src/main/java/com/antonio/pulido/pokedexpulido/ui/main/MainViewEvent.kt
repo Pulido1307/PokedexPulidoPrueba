@@ -1,5 +1,6 @@
 package com.antonio.pulido.pokedexpulido.ui.main
 
 sealed interface MainViewEvent {
-    data class onSearchTextChange(val search: String): MainViewEvent
+    object OnChageTheme: MainViewEvent
+    data class OnSearchTextChange(val search: String) : MainViewEvent
 }

@@ -19,14 +19,14 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = PokedexFont,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = 26.sp,
         letterSpacing = 0.sp,
         color = TextColor
     ),
     bodyMedium = TextStyle(
         fontFamily = PokedexFont,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         letterSpacing = 0.sp,
         color = Color.White
     ),

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.antonio.pulido.pokedexpulido.ui.navigation.Navigation
-import com.antonio.pulido.pokedexpulido.ui.theme.PokedexPulidoTheme
+import com.antonio.pulido.pokedexpulido.ui.theme.theme.PokedexPulidoTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -1,6 +1,7 @@
 package com.antonio.pulido.pokedexpulido.ui.main.composable
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,21 +22,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 
-import com.antonio.pulido.pokedexpulido.ui.theme.Primary
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 import com.antonio.pulido.web.ApiConstants
 
 @Composable
 fun PokeCard(
     modifier: Modifier = Modifier,
-    url: String,
-    nombre: String
+    id: Int,
+    nombre: String,
+    onClick: () -> Unit
 ) {
-    val parts = url.split("/")
-
-    val pokemonNumber = parts[parts.size - 2].toInt()
-
     Card(
         modifier
             .shadow(
@@ -43,12 +41,15 @@ fun PokeCard(
                 shape = RoundedCornerShape(25.dp)
             )
             .fillMaxWidth(1f)
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable {
+                onClick()
+            },
         elevation = CardDefaults.elevatedCardElevation(
             defaultElevation = 5.dp,
         ),
         colors = CardDefaults.cardColors(
-            containerColor = Primary
+            containerColor = PrimaryCard
         )
     ) {
         Column(
@@ -56,15 +57,19 @@ fun PokeCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
-                model = ApiConstants.getPokeImage(pokemonNumber),
+                model = ApiConstants.getPokeImage(id),
                 contentDescription = "Imagen pokedex",
                 modifier = modifier.size(70.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = modifier.height(10.dp))
-            Box(modifier = modifier.background(Secondary).padding(10.dp)){
+            Box(
+                modifier = modifier
+                    .background(Secondary)
+                    .padding(10.dp)
+            ) {
                 Text(
-                   text = "#$pokemonNumber $nombre",
+                    text = "#$id $nombre",
                     modifier = modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodySmall

@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -22,7 +23,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.antonio.pulido.pokedexpulido.ui.theme.PokedexFont
-import com.antonio.pulido.pokedexpulido.ui.theme.Primary
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
 @Composable
@@ -37,12 +37,12 @@ fun TextFieldSearch(
             .padding(start = 10.dp),
         onValueChange = onValueTextChange,
         colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Primary,
-            unfocusedTextColor = Primary,
-            cursorColor = Primary,
+            focusedTextColor = MaterialTheme.colorScheme.primary,
+            unfocusedTextColor = MaterialTheme.colorScheme.primary,
+            cursorColor = MaterialTheme.colorScheme.primary,
             errorTextColor = Color.Red,
-            unfocusedBorderColor = Primary,
-            focusedBorderColor = Primary,
+            unfocusedBorderColor = MaterialTheme.colorScheme.primary,
+            focusedBorderColor = MaterialTheme.colorScheme.primary,
             errorContainerColor = Color.White,
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
@@ -68,7 +68,7 @@ fun TextFieldSearch(
                 style = TextStyle.Default.copy(
                     fontSize = 10.sp,
                     fontFamily = PokedexFont,
-                    color = Primary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             )
