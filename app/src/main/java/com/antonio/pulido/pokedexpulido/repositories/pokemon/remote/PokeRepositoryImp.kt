@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.repositories.remote
+package com.antonio.pulido.pokedexpulido.repositories.pokemon.remote
 
 import com.antonio.pulido.domain.models.response.info.PokeInfoResponse
 import com.antonio.pulido.domain.models.response.list.PokeResponse

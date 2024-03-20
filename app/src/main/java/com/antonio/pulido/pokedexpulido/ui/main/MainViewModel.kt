@@ -5,7 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import com.antonio.pulido.pokedexpulido.repositories.data.store.DataStoreRepository
-import com.antonio.pulido.pokedexpulido.repositories.remote.PokeRepository
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.remote.PokeRepository
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.antonio.pulido.web.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel

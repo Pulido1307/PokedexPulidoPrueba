@@ -9,10 +9,8 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
@@ -26,7 +24,7 @@ data class NavigationItem(
     val route: String? = null
 )
 
-private val items = listOf<NavigationItem>(
+private val items = listOf(
     NavigationItem(
         title = "Pokemones",
         icon = R.drawable.twotone_catching_pokemon_24,
@@ -48,7 +46,7 @@ fun BottomNavigation(
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.background,
     ) {
-        items.forEachIndexed { index, navigationItem ->
+        items.forEachIndexed { _, navigationItem ->
             NavigationBarItem(
                 icon = {
                     Icon(

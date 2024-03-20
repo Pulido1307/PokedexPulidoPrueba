@@ -2,10 +2,8 @@ package com.antonio.pulido.pokedexpulido.ui.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,24 +17,20 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
-import com.antonio.pulido.pokedexpulido.ui.composables.TextFieldSearch
+import com.antonio.pulido.pokedexpulido.ui.composables.textfield.TextFieldSearch
 import com.antonio.pulido.pokedexpulido.ui.composables.dialogs.LoadingDialog
-import com.antonio.pulido.pokedexpulido.ui.composables.nav.BottomNavigation
 import com.antonio.pulido.pokedexpulido.ui.composables.scaffold.CustomScaffoldWithNav
 import com.antonio.pulido.pokedexpulido.ui.main.composable.PokeCard
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
@@ -110,7 +104,7 @@ fun MainScreen(
                     val id = parts[parts.size - 2].toInt()
                     PokeCard(id = id, nombre = it.name, onClick = {
                         navController.currentBackStackEntry?.savedStateHandle?.set(
-                            "id", id ?: 0
+                            "id", id
                         )
 
                         navController.navigate(Screens.INFO)

@@ -4,8 +4,8 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import com.antonio.pulido.domain.models.response.info.PokeInfoResponse
-import com.antonio.pulido.pokedexpulido.repositories.local.LocalRepository
-import com.antonio.pulido.pokedexpulido.repositories.remote.PokeRepository
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.local.LocalRepository
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.remote.PokeRepository
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.antonio.pulido.web.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel

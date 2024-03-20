@@ -2,8 +2,7 @@ package com.antonio.pulido.pokedexpulido.ui.favorites
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.antonio.pulido.pokedexpulido.repositories.local.LocalRepository
-import com.antonio.pulido.pokedexpulido.ui.main.MainViewState
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.local.LocalRepository
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

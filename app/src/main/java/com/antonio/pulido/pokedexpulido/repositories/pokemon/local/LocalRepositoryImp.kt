@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.repositories.local
+package com.antonio.pulido.pokedexpulido.repositories.pokemon.local
 
 import com.antonio.pulido.database.DbRoom
 import com.antonio.pulido.domain.entities.PokeEntity
@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class LocalRepositoryImp @Inject constructor(
     private val database: DbRoom
-) : LocalRepository{
-    override suspend fun upsert(poke: PokeInfoResponse): Long {
-        return database.pokeDao().upsert(PokeMapper.toEntity(poke))
+) : LocalRepository {
+    override suspend fun upsert(pokeInfoResponse: PokeInfoResponse): Long {
+        return database.pokeDao().upsert(PokeMapper.toEntity(pokeInfoResponse))
     }
 
     override suspend fun getPokemon(): List<PokeEntity> {

@@ -14,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class DataStoreModule {
 
-    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "com.antonio.pulido.pokedexpulido")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "com.antonio.pulido.pokedexpulido")
     @Provides
     fun provideDataStore(@ApplicationContext applicationContext: Context): DataStore<Preferences> {
         return applicationContext.dataStore

@@ -3,10 +3,8 @@ package com.antonio.pulido.pokedexpulido.ui.theme.theme
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.antonio.pulido.pokedexpulido.repositories.data.store.DataStoreRepository
-import com.antonio.pulido.pokedexpulido.ui.main.MainViewEvent
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

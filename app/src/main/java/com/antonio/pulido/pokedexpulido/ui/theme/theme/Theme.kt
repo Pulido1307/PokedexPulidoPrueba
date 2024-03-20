@@ -2,7 +2,6 @@ package com.antonio.pulido.pokedexpulido.ui.theme.theme
 
 import android.app.Activity
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -17,16 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.antonio.pulido.pokedexpulido.ui.favorites.FavoritesViewState
 import com.antonio.pulido.pokedexpulido.ui.theme.BackgroundDarks
 import com.antonio.pulido.pokedexpulido.ui.theme.BackgroundLight
-import com.antonio.pulido.pokedexpulido.ui.theme.Pink40
-import com.antonio.pulido.pokedexpulido.ui.theme.Pink80
 import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
-import com.antonio.pulido.pokedexpulido.ui.theme.Purple40
-import com.antonio.pulido.pokedexpulido.ui.theme.Purple80
-import com.antonio.pulido.pokedexpulido.ui.theme.PurpleGrey40
-import com.antonio.pulido.pokedexpulido.ui.theme.PurpleGrey80
 import com.antonio.pulido.pokedexpulido.ui.theme.Typography
 
 private val DarkColorScheme = darkColorScheme(

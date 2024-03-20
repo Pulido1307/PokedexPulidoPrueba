@@ -1,6 +1,5 @@
 package com.antonio.pulido.pokedexpulido.ui.info.remote
 
-import com.antonio.pulido.domain.entities.PokeEntity
 import com.antonio.pulido.domain.models.response.info.PokeInfoResponse
 import com.antonio.pulido.pokedexpulido.viewstate.ViewState
 

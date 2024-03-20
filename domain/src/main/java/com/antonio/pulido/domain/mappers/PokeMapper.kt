@@ -5,8 +5,8 @@ import com.antonio.pulido.domain.models.response.info.PokeInfoResponse
 
 object PokeMapper {
     fun toEntity(pokeInfoResponse: PokeInfoResponse) = PokeEntity(
-        id = pokeInfoResponse.id ?: 0,
-        name = pokeInfoResponse.name ?: "",
+        id = pokeInfoResponse.id,
+        name = pokeInfoResponse.name,
         types = pokeInfoResponse.types.map { it.type.name }.toString().replace("[", "").replace("]", ""),
         height = pokeInfoResponse.height,
         weight = pokeInfoResponse.weight,

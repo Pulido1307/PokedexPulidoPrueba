@@ -1,13 +1,10 @@
 package com.antonio.pulido.pokedexpulido.ui.info.local
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import com.antonio.pulido.domain.entities.PokeEntity
-import com.antonio.pulido.pokedexpulido.repositories.local.LocalRepository
-import com.antonio.pulido.pokedexpulido.ui.info.remote.InfoPokemonViewState
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.local.LocalRepository
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
-import com.antonio.pulido.web.BaseApiResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

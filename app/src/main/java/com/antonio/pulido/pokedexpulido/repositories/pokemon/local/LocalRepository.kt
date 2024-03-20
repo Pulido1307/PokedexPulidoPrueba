@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.repositories.local
+package com.antonio.pulido.pokedexpulido.repositories.pokemon.local
 
 import com.antonio.pulido.domain.entities.PokeEntity
 import com.antonio.pulido.domain.models.response.info.PokeInfoResponse

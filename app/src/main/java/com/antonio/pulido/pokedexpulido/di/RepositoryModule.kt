@@ -2,10 +2,10 @@ package com.antonio.pulido.pokedexpulido.di
 
 import com.antonio.pulido.pokedexpulido.repositories.data.store.DataStoreRepository
 import com.antonio.pulido.pokedexpulido.repositories.data.store.DataStoreRepositoryImp
-import com.antonio.pulido.pokedexpulido.repositories.local.LocalRepository
-import com.antonio.pulido.pokedexpulido.repositories.local.LocalRepositoryImp
-import com.antonio.pulido.pokedexpulido.repositories.remote.PokeRepository
-import com.antonio.pulido.pokedexpulido.repositories.remote.PokeRepositoryImp
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.local.LocalRepository
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.local.LocalRepositoryImp
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.remote.PokeRepository
+import com.antonio.pulido.pokedexpulido.repositories.pokemon.remote.PokeRepositoryImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
