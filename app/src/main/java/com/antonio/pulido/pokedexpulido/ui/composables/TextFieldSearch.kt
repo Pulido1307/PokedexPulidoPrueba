@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.antonio.pulido.pokedexpulido.ui.theme.PokedexFont
+import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
 @Composable
@@ -34,7 +35,7 @@ fun TextFieldSearch(
     OutlinedTextField(
         value = value,
         modifier = modifier.fillMaxWidth()
-            .padding(start = 10.dp),
+            .padding(horizontal = 10.dp),
         onValueChange = onValueTextChange,
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.primary,
@@ -61,7 +62,7 @@ fun TextFieldSearch(
             imeAction = ImeAction.Search
         ),
         singleLine = true,
-        textStyle = TextStyle.Default.copy(fontSize = 10.sp, fontFamily = PokedexFont),
+        textStyle = TextStyle.Default.copy(fontSize = 14.sp, fontFamily = PokedexFont, color = Secondary),
         placeholder = {
             Text(
                 text = "Buscar",

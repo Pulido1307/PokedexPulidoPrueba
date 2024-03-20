@@ -69,7 +69,7 @@ class MainViewModel @Inject constructor(
 
     private fun getPokeList() = viewModelScope.launch {
         val state = currentViewState<MainViewState>()
-        pokeRepository.getPokeList(limit = 151, offset = 0).collect {
+        pokeRepository.getPokeList(limit = 902, offset = 0).collect {
             when (it) {
                 is NetworkResult.Error -> {
                     onError("Ocurrió un error al conseguir la información de la PokeApi")

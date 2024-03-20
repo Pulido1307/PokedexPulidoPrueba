@@ -93,30 +93,11 @@ fun MainScreen(
 
             Spacer(modifier = modifier.height(16.dp))
 
-            Row {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Box(modifier = modifier.weight(1f)) {
-
-                        TextFieldSearch(value = uiState.searchText ?: "", onValueTextChange = {
-                            viewModel.onEvent(
-                                MainViewEvent.OnSearchTextChange(it)
-                            )
-                        })
-                    }
-                    IconButton(onClick = {
-//                        viewModel.onEvent(PropertiesViewEvent.ShowDialogFilter)
-                    }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.filter),
-                            contentDescription = null
-                        )
-                    }
-                }
-            }
+            TextFieldSearch(value = uiState.searchText ?: "", onValueTextChange = {
+                viewModel.onEvent(
+                    MainViewEvent.OnSearchTextChange(it)
+                )
+            })
 
             Spacer(modifier = modifier.height(16.dp))
 
