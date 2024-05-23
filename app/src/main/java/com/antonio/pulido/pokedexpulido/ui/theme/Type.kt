@@ -36,5 +36,24 @@ val Typography = Typography(
         fontSize = 12.sp,
         letterSpacing = 0.sp,
         color = Color.White
+    ),
+    labelLarge = TextStyle(
+        fontFamily = PokedexFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 22.sp,
+        letterSpacing = 0.sp
+    ),
+    labelMedium = TextStyle(
+        fontFamily = PokedexFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 15.sp,
+        letterSpacing = 0.sp,
+        color = TextColor
+    ),
+    labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 10.sp,
+        color =  TextColor
     )
 )

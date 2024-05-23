@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "682249754606",
+    "firebase_url": "https://crudbasededatos-81bc5-default-rtdb.firebaseio.com",
+    "project_id": "crudbasededatos-81bc5",
+    "storage_bucket": "crudbasededatos-81bc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682249754606:android:889f1cdb3b029a27a520ff",
+        "android_client_info": {
+          "package_name": "com.antonio.pulido.pokedexpulido"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg5DOdpPH8KQsZXyrwuxvBK9_270k_OV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682249754606:android:99893b08c2d3949ca520ff",
+        "android_client_info": {
+          "package_name": "com.tec.crudbasededatos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg5DOdpPH8KQsZXyrwuxvBK9_270k_OV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

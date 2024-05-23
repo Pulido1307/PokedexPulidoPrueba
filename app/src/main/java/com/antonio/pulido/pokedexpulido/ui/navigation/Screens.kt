@@ -5,4 +5,7 @@ object Screens {
     const val INFO = "info"
     const val FAVS = "favs"
     const val INFO_LOCAL = "info_local"
+
+    //MOVIES
+    const val MOVIES_SCREEN = "movies_screen"
 }
