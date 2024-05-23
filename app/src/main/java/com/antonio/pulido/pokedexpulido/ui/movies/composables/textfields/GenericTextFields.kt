@@ -142,7 +142,7 @@ fun GenericDropDown(
     isError: Boolean = false,
     icon: Painter? = null,
     label: String,
-    isEnabled: Boolean = true,
+    isEnabled: Boolean = false,
     conditionLabel: Boolean = false,
     @StringRes supportingText: Int? = null,
     heighSize: Int = 46

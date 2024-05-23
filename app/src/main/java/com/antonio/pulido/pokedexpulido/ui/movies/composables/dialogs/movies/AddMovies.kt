@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.textfields.GenericDropDown
@@ -70,7 +72,36 @@ fun AddMovies(
             GenericTextField(
                 value = name,
                 onValueTextChange = onNameChange,
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Text,
                 label = "Nombre de la película"
+            )
+            Spacer(modifier = modifier.height(16.dp))
+
+            GenericTextField(
+                value = descripcion,
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Text,
+                onValueTextChange = onDescripcionChange,
+                label = "Descripción"
+            )
+            Spacer(modifier = modifier.height(16.dp))
+
+            GenericTextField(
+                value = duracion,
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Phone,
+                onValueTextChange = onDuracionChange,
+                label = "Duración"
+            )
+            Spacer(modifier = modifier.height(16.dp))
+
+            GenericTextField(
+                value = year,
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Phone,
+                onValueTextChange = onYearChange,
+                label = "Año"
             )
             Spacer(modifier = modifier.height(16.dp))
 
@@ -79,27 +110,6 @@ fun AddMovies(
                 selectedOption = idioma,
                 onOptionSelected = onIdiomaChange,
                 label = "Idioma"
-            )
-            Spacer(modifier = modifier.height(16.dp))
-
-            GenericTextField(
-                value = descripcion,
-                onValueTextChange = onDescripcionChange,
-                label = "Descripción"
-            )
-            Spacer(modifier = modifier.height(16.dp))
-
-            GenericTextField(
-                value = duracion,
-                onValueTextChange = onDuracionChange,
-                label = "Duración"
-            )
-            Spacer(modifier = modifier.height(16.dp))
-
-            GenericTextField(
-                value = year,
-                onValueTextChange = onYearChange,
-                label = "Año"
             )
             Spacer(modifier = modifier.height(16.dp))
 
