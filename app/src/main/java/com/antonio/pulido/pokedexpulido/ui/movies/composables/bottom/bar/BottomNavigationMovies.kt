@@ -31,9 +31,9 @@ private val itemsMovies = listOf(
         route = Screens.MOVIES_SCREEN
     ),
     NavigationItem(
-        title = "Favoritos",
+        title = "Actores",
         icon = R.drawable.twotone_favorite_24,
-        route = Screens.FAVS
+        route = Screens.ACTORES_SCREEN
     )
 )
 

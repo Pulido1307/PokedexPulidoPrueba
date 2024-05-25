@@ -34,6 +34,12 @@ class ActoresViewModel @Inject constructor(
                         actoresLista.add(actorActual?: Actor())
                     }
                 }
+
+                updateViewState(
+                    currentViewState<ActoresViewState>().copy(
+                        actores = actoresLista
+                    )
+                )
             }
 
             override fun onCancelled(error: DatabaseError) {
