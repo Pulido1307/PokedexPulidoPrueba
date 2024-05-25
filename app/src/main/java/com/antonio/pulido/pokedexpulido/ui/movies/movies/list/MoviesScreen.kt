@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.ui.movies.movies
+package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
@@ -49,7 +49,10 @@ fun MoviesScreen(
                 items(uiState.peliculas) {
                     AnimatedVisibility(visible = true) {
                         CardMovies(name = it.nombre ?: "") {
-
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                "id", it.codigo
+                            )
+                            navController.navigate(Screens.INFO_MOVIES_SCREEN)
                         }
                     }
                 }

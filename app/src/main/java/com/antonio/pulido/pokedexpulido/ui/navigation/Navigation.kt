@@ -6,7 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresScreen
-import com.antonio.pulido.pokedexpulido.ui.movies.movies.MoviesScreen
+import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.InfoMoviesScreen
+import com.antonio.pulido.pokedexpulido.ui.movies.movies.list.MoviesScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.usuarios.UsuariosScreen
 import com.antonio.pulido.pokedexpulido.ui.pokemon.favorites.FavoritesScreen
 import com.antonio.pulido.pokedexpulido.ui.pokemon.info.local.InfoLocalScreen
@@ -45,6 +46,10 @@ fun Navigation(navController: NavController) {
 
         composable(Screens.USUARIOS_SCREEN){
             UsuariosScreen(navController = navController)
+        }
+        
+        composable(Screens.INFO_MOVIES_SCREEN){
+            InfoMoviesScreen(navController = navController)
         }
     }
 }

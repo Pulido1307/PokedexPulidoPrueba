@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.ui.movies.movies
+package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
 
 import android.app.Application
 import android.util.Log

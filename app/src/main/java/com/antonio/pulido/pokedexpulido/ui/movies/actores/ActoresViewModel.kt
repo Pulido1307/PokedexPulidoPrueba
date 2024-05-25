@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import com.antonio.pulido.pokedexpulido.domain.entidades.Actor
-import com.antonio.pulido.pokedexpulido.ui.movies.movies.MoviesViewState
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

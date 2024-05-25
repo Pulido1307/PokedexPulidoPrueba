@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.ui.movies.movies
+package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
 
 import androidx.annotation.StringRes
 import com.antonio.pulido.pokedexpulido.domain.entidades.Pelicula

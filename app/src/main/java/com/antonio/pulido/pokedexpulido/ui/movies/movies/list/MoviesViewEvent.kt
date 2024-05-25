@@ -1,4 +1,4 @@
-package com.antonio.pulido.pokedexpulido.ui.movies.movies
+package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
 
 sealed interface MoviesViewEvent {
     object ShowDialogAddMovie : MoviesViewEvent
