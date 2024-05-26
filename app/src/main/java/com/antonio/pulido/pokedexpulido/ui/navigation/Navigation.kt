@@ -51,5 +51,13 @@ fun Navigation(navController: NavController) {
         composable(Screens.INFO_MOVIES_SCREEN){
             InfoMoviesScreen(navController = navController)
         }
+
+        composable(Screens.PRODUCTORA_SCREEN){
+            InfoLocalScreen(navController = navController)
+        }
+
+        composable(Screens.DIRECTOR_SCREEN){
+            InfoLocalScreen(navController = navController)
+        }
     }
 }
