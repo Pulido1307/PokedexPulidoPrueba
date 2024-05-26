@@ -1,4 +1,4 @@
-package com.tec.crudbasededatos.domain.models.pivotes
+package com.antonio.pulido.pokedexpulido.domain.pivotes
 
 data class Actuar(
     val idActuar:String? ="",
