@@ -151,14 +151,71 @@ fun InfoMoviesScreen(
                 }
             )
 
-//            ItemInfo(title = "Director") {
-//
-//            }
-//
-//            ItemInfo(title = "Productora") {
-//
-//            }
-//
+            ItemInfo(
+                title = "Directores", content = {
+                    uiState.directoresInvolucrados.forEachIndexed { index, director ->
+                        Text(
+                            text =
+                            "${index + 1}.- Nombre: ${director.nombre}\n\t\tEdad: ${director.edad}",
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                color = Secondary,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Light
+                            ),
+                            modifier = modifier.padding(horizontal = 10.dp)
+                        )
+                        Spacer(modifier = modifier.height(4.dp))
+                    }
+                },
+                listOptions = uiState.directores.map { it.nombre ?: "" },
+                onChangeText = {
+                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeDirectorText(it))
+                },
+                onDissmiDialog = {
+                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditDirector)
+                },
+                showEdit = {
+                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditDirector)
+                },
+                titleDialog = "Director",
+                editActor = {
+                    viewModel.onEvent(InfoMoviesViewEvent.EditDirector)
+                }
+            )
+
+            ItemInfo(
+                title = "Productores", content = {
+                    uiState.produccionesInvolucradas.forEachIndexed { index, productor ->
+                        Text(
+                            text =
+                            "${index + 1}.- Nombre: ${productor.nombre}\n\t\tPaís: ${productor.pais}",
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                color = Secondary,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Light
+                            ),
+                            modifier = modifier.padding(horizontal = 10.dp)
+                        )
+                        Spacer(modifier = modifier.height(4.dp))
+                    }
+                },
+                listOptions = uiState.produtores.map { it.nombre ?: "" },
+                onChangeText = {
+                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeProductorText(it))
+                },
+                onDissmiDialog = {
+                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditPrdoctor)
+                },
+                showEdit = {
+                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditdProductor)
+                },
+                titleDialog = "Productores",
+                editActor = {
+                    viewModel.onEvent(InfoMoviesViewEvent.EditProductor)
+                }
+            )
 //            ItemInfo(title = "Reseñas") {
 //
 //            }

@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.tec.crudbasededatos.domain.models.pivotes.Dirigir
+import com.tec.crudbasededatos.domain.models.pivotes.Producir
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,15 +43,85 @@ class InfoMoviesViewModel @Inject constructor(
             InfoMoviesViewEvent.DeleteInfoMovie -> deleteMovie()
             is InfoMoviesViewEvent.GetInfo -> getInfo(event.id)
             is InfoMoviesViewEvent.OnChangeActorText -> onChangeActorText(event.text)
+            is InfoMoviesViewEvent.OnChangeDirectorText -> onChangeDirectorText(event.text)
+            is InfoMoviesViewEvent.OnChangeProductorText -> onChangeProductorText(event.text)
             InfoMoviesViewEvent.HiddenEditActor -> setEditActor(false)
             InfoMoviesViewEvent.ShowEditActor -> setEditActor(true)
+            InfoMoviesViewEvent.HiddenEditDirector -> setEditDirector(false)
+            InfoMoviesViewEvent.ShowEditDirector -> setEditDirector(true)
             InfoMoviesViewEvent.EditActor -> editActor()
+            InfoMoviesViewEvent.EditDirector -> editDirector()
+            InfoMoviesViewEvent.EditProductor -> editProductor()
+            InfoMoviesViewEvent.HiddenEditPrdoctor -> setStatusEditProductor(false)
+            InfoMoviesViewEvent.ShowEditdProductor -> setStatusEditProductor(true)
+        }
+    }
+
+    private fun setStatusEditProductor(value: Boolean) {
+        updateViewState(
+            currentViewState<InfoMoviesViewState>().copy(
+                showEditProductora = value
+            )
+        )
+    }
+
+
+    private fun setEditDirector(value: Boolean) {
+        updateViewState(
+            currentViewState<InfoMoviesViewState>().copy(
+                showEditDirector = value
+            )
+        )
+    }
+
+    private fun editProductor() {
+        val state = currentViewState<InfoMoviesViewState>()
+        val idPush = dataBaseProducir.push().key
+        val producir = Producir(
+            idProduccion = idPush,
+            codigo = state.id,
+            clave = state.produtores.find { it.nombre == state.productorSeleccionado}?.clave?:""
+        )
+        dataBaseProducir.child(idPush?:"").setValue(producir).addOnSuccessListener {
+            Toast.makeText(getApplication(), "¡Nuevo Productor agregado!", Toast.LENGTH_LONG).show()
+            updateViewState(
+                state.copy(
+                    showEditProductora = false
+                )
+            )
+            getDirecciones()
+        }.addOnFailureListener {
+            Toast.makeText(getApplication(), "¡Fallo la pelicula!", Toast.LENGTH_LONG).show()
+            Log.i("Polar dice error", "prueba: ${it.message}")
+        }
+    }
+
+    private fun editDirector() {
+        val state = currentViewState<InfoMoviesViewState>()
+        val idPush = dataBaseDirigir.push().key
+        val dirigir = Dirigir(
+            noDirigida = idPush,
+            codigo = state.id,
+            id = state.directores.find { it.nombre == state.directorSeleccionado}?.id?:""
+        )
+
+        dataBaseDirigir.child(idPush?:"").setValue(dirigir).addOnSuccessListener {
+            Toast.makeText(getApplication(), "¡Nuevo Directo agregado!", Toast.LENGTH_LONG).show()
+            updateViewState(
+                state.copy(
+                    showEditDirector = false
+                )
+            )
+            getDirecciones()
+        }.addOnFailureListener {
+            Toast.makeText(getApplication(), "¡Fallo la pelicula!", Toast.LENGTH_LONG).show()
+            Log.i("Polar dice error", "prueba: ${it.message}")
         }
     }
 
     private fun editActor() {
         val state = currentViewState<InfoMoviesViewState>()
-        val idPush = dataBase.push().key
+        val idPush = dataBaseActuar.push().key
 
         val actuar = Actuar(
             idActuar = idPush,
@@ -75,6 +147,20 @@ class InfoMoviesViewModel @Inject constructor(
         updateViewState(
             currentViewState<InfoMoviesViewState>().copy(
                 showEditActor = value
+            )
+        )
+    }
+    private fun onChangeProductorText(text: String) {
+        updateViewState(
+            currentViewState<InfoMoviesViewState>().copy(
+                productorSeleccionado = text
+            )
+        )
+    }
+    private fun onChangeDirectorText(text: String) {
+        updateViewState(
+            currentViewState<InfoMoviesViewState>().copy(
+                directorSeleccionado = text
             )
         )
     }
@@ -211,26 +297,93 @@ class InfoMoviesViewModel @Inject constructor(
                         }
                     }
                 }
-
-
                 for (actor in actores) {
                     if (actuaciones.any { it.idActor == actor.dni }) {
                         actoresInvolucrados.add(actor)
                     }
                 }
-
                 updateViewState(
                     state.copy(
                         actoresInvolucrados = actoresInvolucrados
                     )
                 )
+                getDirecciones()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(getApplication(), "Error ${error}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
+    private fun getDirecciones(){
+        val state = currentViewState<InfoMoviesViewState>()
+        val directores = state.directores
+        val direcciones: ArrayList<Dirigir> = arrayListOf()
+        val directoresInvolucrados: ArrayList<Director> = arrayListOf()
+        dataBaseDirigir.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (direccion in snapshot.children){
+                        val direccionActual = direccion.getValue(Dirigir::class.java)
+                        if(state.id == direccionActual?.codigo){
+                            direcciones.add(direccionActual ?: Dirigir())
+                        }
+                    }
+                }
+
+                for (director in directores){
+                    if (direcciones.any { it.id == director.id}){
+                        directoresInvolucrados.add(director)
+                    }
+                }
+
+                updateViewState(
+                    state.copy(
+                        directoresInvolucrados = directoresInvolucrados
+                    )
+                )
+                getDirecciones()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(getApplication(), "Error ${error}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getProducidas(){
+        val state = currentViewState<InfoMoviesViewState>()
+        val produtores = state.produtores
+        val producciones: ArrayList<Producir> = arrayListOf()
+        val produccionesInvolucradas: ArrayList<Productora> = arrayListOf()
+        dataBaseProducir.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for(produccion in snapshot.children){
+                        val produccionActual = produccion.getValue(Producir::class.java)
+                        if(state.id == produccionActual?.codigo){
+                            producciones.add(produccionActual?: Producir())
+                        }
+                    }
+                    for (productor in produtores){
+                        if(producciones.any { it.clave == productor.clave }){
+                            produccionesInvolucradas.add(productor)
+                        }
+                    }
+
+                    updateViewState(
+                        state.copy(
+                            produccionesInvolucradas = produccionesInvolucradas
+                        )
+                    )
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
             }
 
         })
     }
+
 }

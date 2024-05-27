@@ -18,8 +18,17 @@ data class InfoMoviesViewState(
     val produtores: List<Productora> = listOf(),
 
     val actoresInvolucrados: List<Actor> = listOf(),
+    val directoresInvolucrados: List<Director> = listOf(),
+    val produccionesInvolucradas: List<Productora> = listOf(),
+
     val actorSeleccionado: String = "",
     val showEditActor: Boolean = false,
+
+    val directorSeleccionado: String = "",
+    val showEditDirector: Boolean = false,
+
+    val productorSeleccionado: String = "",
+    val showEditProductora: Boolean = false,
 
     val dirigir: List<Director> = listOf(),
     val producidas: List<Productora> = listOf(),
