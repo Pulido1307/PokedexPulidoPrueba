@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
+import com.antonio.pulido.pokedexpulido.ui.composables.items.ItemInfo
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.EditarActor
 import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
@@ -115,6 +117,67 @@ fun InfoMoviesScreen(
             CellInfo(title = "Año", info = "${uiState.pelicula.year}")
 
             CellInfo(title = "Genero", info = "${uiState.pelicula.genero}")
+
+            ItemInfo(
+                title = "Actores", content = {
+                    uiState.actoresInvolucrados.forEachIndexed { index, actor ->
+                        Text(
+                            text =
+                            "${index + 1}.- Nombre: ${actor.nombre}\n\t\tNacionalidad: ${actor.nacionalidad}\n\t\tEdad: ${actor.edad}",
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                color = Secondary,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Light
+                            ),
+                            modifier = modifier.padding(horizontal = 10.dp)
+                        )
+                        Spacer(modifier = modifier.height(4.dp))
+                    }
+                },
+                listOptions = uiState.actores.map { it.nombre ?: "" },
+                onChangeText = {
+                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeActorText(it))
+                },
+                onDissmiDialog = {
+                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditActor)
+                },
+                showEdit = {
+                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditActor)
+                },
+                titleDialog = "Actor",
+                editActor = {
+                    viewModel.onEvent(InfoMoviesViewEvent.EditActor)
+                }
+            )
+
+//            ItemInfo(title = "Director") {
+//
+//            }
+//
+//            ItemInfo(title = "Productora") {
+//
+//            }
+//
+//            ItemInfo(title = "Reseñas") {
+//
+//            }
+
+
+        }
+    }
+
+    when {
+        uiState.showEditActor -> {
+            EditarActor(
+                onDismissDialog = { viewModel.onEvent(InfoMoviesViewEvent.HiddenEditActor) },
+                options = uiState.actores.map { it.nombre ?: "" },
+                onTextChange = { viewModel.onEvent(InfoMoviesViewEvent.OnChangeActorText(it)) },
+                value = uiState.actorSeleccionado,
+                title = "Actor"
+            ) {
+                viewModel.onEvent(InfoMoviesViewEvent.EditActor)
+            }
         }
     }
 }
