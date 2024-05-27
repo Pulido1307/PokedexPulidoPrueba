@@ -33,7 +33,6 @@ fun AddDirector(
     edad: String,
     onEdadChange: (String) -> Unit,
     addDirector: () -> Unit
-
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
     ModalBottomSheet(
