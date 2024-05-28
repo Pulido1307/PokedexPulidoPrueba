@@ -19,7 +19,9 @@ import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewModel
 import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.cards.movies.CardMovies
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.AddActores
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.InfoActor
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.director.AddDirector
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.director.InfoDirector
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.scaffold.CustomScaffoldWithNavMovies
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.util.isNumeric
@@ -74,6 +76,14 @@ fun DirectorScreen(
                     viewModel.onEvent(DirectorViewEvent.AddDirector)
                 },
 
+            )
+        }
+
+        uiState.showInfoDirector -> {
+            InfoDirector(
+                onDismissDialog = { viewModel.onEvent(DirectorViewEvent.HiddenDialogInfoDirector) },
+                nombre = uiState.directorSeleccionado.nombre?:"",
+                edad = uiState.directorSeleccionado.edad?.toInt()?:0,
             )
         }
     }

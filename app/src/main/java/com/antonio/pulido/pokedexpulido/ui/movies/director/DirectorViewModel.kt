@@ -57,7 +57,25 @@ class DirectorViewModel @Inject constructor(
             DirectorViewEvent.HiddenDialogAddDirector -> setStatusAddDialog(false)
             is DirectorViewEvent.OnChangeEdad -> onChangeEdad(event.edad)
             is DirectorViewEvent.OnChangeName -> onChangeName(event.name)
+            is DirectorViewEvent.ShowDialogInfoDirector -> showDialogInfoDirector(event.item)
+            DirectorViewEvent.HiddenDialogInfoDirector -> setInfoDirector(false)
         }
+    }
+
+    private fun showDialogInfoDirector(item: Director) {
+        updateViewState(
+            currentViewState<DirectorViewState>().copy(
+                directorSeleccionado = item
+            )
+        )
+    }
+
+    private fun setInfoDirector(value: Boolean) {
+        updateViewState(
+            currentViewState<DirectorViewState>().copy(
+                showInfoDirector = value
+            )
+        )
     }
 
     private fun addDirector() {

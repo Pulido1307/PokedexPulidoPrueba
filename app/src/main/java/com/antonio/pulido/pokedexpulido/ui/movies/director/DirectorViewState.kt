@@ -9,6 +9,7 @@ data class DirectorViewState(
     val isLoading: Boolean = false,
 
     val showAddDirector: Boolean = false,
+    val showInfoDirector: Boolean = false,
 
     val name: String = "",
     @StringRes val nameError: Int? = null,
@@ -17,4 +18,6 @@ data class DirectorViewState(
     @StringRes val edadError: Int?=null,
 
     val directores: List<Director> = listOf(),
+
+    val directorSeleccionado: Director = Director()
 ): ViewState()
