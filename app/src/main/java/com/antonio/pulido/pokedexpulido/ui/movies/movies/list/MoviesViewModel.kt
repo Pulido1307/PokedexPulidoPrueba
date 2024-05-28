@@ -3,6 +3,7 @@ package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import com.antonio.pulido.pokedexpulido.domain.entidades.Aplicacion
 import com.antonio.pulido.pokedexpulido.domain.entidades.Pelicula
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
@@ -18,10 +19,12 @@ class MoviesViewModel @Inject constructor(
     application: Application
 ): BaseViewModel(application){
     private var dataBase: DatabaseReference = Firebase.database.getReference("Peliculas")
+    private var dataBaseApp: DatabaseReference = Firebase.database.getReference("Aplicacion")
     init {
         initViewState(MoviesViewState())
         getPeliculas()
     }
+
 
     private fun getPeliculas() {
         val peliculasLista: ArrayList<Pelicula> = arrayListOf()
@@ -122,6 +125,56 @@ class MoviesViewModel @Inject constructor(
                 dialogAddMovie = value
             )
         )
+    }
+    private fun addApps() {
+        val idPushAmazon = dataBaseApp.push().key
+        val aplicacionAmazon = Aplicacion(
+            clave = idPushAmazon,
+            nombre = "Amazon Prime"
+        )
+        dataBaseApp.child(idPushAmazon?:"").setValue(aplicacionAmazon)
+
+        val idPushDisneyPlus = dataBaseApp.push().key
+        val aplicacionDisneyPlus = Aplicacion(
+            clave = idPushDisneyPlus,
+            nombre = "Disney Plus"
+        )
+        dataBaseApp.child(idPushDisneyPlus?:"").setValue(aplicacionDisneyPlus)
+
+        val idPushNetflix = dataBaseApp.push().key
+        val aplicacionNetflix = Aplicacion(
+            clave = idPushNetflix,
+            nombre = "Netflix"
+        )
+        dataBaseApp.child(idPushNetflix?:"").setValue(aplicacionNetflix)
+
+        val idPushVix = dataBaseApp.push().key
+        val aplicacionVix = Aplicacion(
+            clave = idPushVix,
+            nombre = "Vix"
+        )
+        dataBaseApp.child(idPushVix?:"").setValue(aplicacionVix)
+
+        val idPushHBOMax = dataBaseApp.push().key
+        val aplicacionHBOMax = Aplicacion(
+            clave = idPushHBOMax,
+            nombre = "HBO Max"
+        )
+        dataBaseApp.child(idPushHBOMax?:"").setValue(aplicacionHBOMax)
+
+        val idPushParamount = dataBaseApp.push().key
+        val aplicacionParamount = Aplicacion(
+            clave = idPushParamount,
+            nombre = "Paramount"
+        )
+        dataBaseApp.child(idPushParamount?:"").setValue(aplicacionParamount)
+
+        val idPushStar = dataBaseApp.push().key
+        val aplicacionStar = Aplicacion(
+            clave = idPushStar,
+            nombre = "Star+"
+        )
+        dataBaseApp.child(idPushStar?:"").setValue(aplicacionStar)
     }
 
     private fun addMovie() {

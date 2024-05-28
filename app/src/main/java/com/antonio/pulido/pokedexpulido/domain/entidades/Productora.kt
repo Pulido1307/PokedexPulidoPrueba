@@ -4,6 +4,4 @@ data class Productora(
     val clave: String?="",
     val nombre: String?="",
     val pais:String?="",
-
-
 )

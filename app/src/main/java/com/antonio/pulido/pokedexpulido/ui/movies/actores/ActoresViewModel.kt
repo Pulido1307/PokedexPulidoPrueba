@@ -42,7 +42,7 @@ class ActoresViewModel @Inject constructor(
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(getApplication(), "Error ${error}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -55,7 +55,25 @@ class ActoresViewModel @Inject constructor(
             is ActoresViewEvent.OnChangeEdad -> onChangeEdad(event.edad)
             is ActoresViewEvent.OnChangeNacionalidad -> onChangeNacionalidad(event.nacionalidad)
             is ActoresViewEvent.OnChangeName -> onChangeName(event.name)
+            is ActoresViewEvent.ShowDialogInfoActor -> showDialogInfoActor(event.item)
+            ActoresViewEvent.HiddenDialogInfoActor -> setInfoActor(false)
         }
+    }
+
+    private fun showDialogInfoActor(item: Actor) {
+        updateViewState(
+            currentViewState<ActoresViewState>().copy(
+                ac
+            )
+        )
+    }
+
+    private fun setInfoActor(value: Boolean) {
+        updateViewState(
+            currentViewState<ActoresViewState>().copy(
+                showInfoActor = value
+            )
+        )
     }
 
     private fun addActor() {

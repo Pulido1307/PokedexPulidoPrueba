@@ -1,13 +1,10 @@
-package com.antonio.pulido.pokedexpulido.ui.movies.movies.list
+package com.antonio.pulido.pokedexpulido.ui.movies.movies.update
 
 import androidx.annotation.StringRes
-import com.antonio.pulido.pokedexpulido.domain.entidades.Pelicula
 import com.antonio.pulido.pokedexpulido.viewstate.ViewState
 
-data class MoviesViewState(
+data class UpdateMovieViewState(
     val isLoading: Boolean = false,
-
-    val dialogAddMovie: Boolean = false,
 
     val name: String = "",
     @StringRes val nameError: Int? = null,
@@ -66,8 +63,4 @@ data class MoviesViewState(
         "Crimen",
         "Misterio",
     ),
-
-    val peliculas: List<Pelicula> = listOf(),
-
-
 ): ViewState()

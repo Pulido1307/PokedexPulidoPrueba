@@ -8,6 +8,7 @@ data class ActoresViewState(
     val isLoading: Boolean = false,
 
     val showAddActor: Boolean = false,
+    val showInfoActor: Boolean = false,
 
     val name: String = "",
     @StringRes val nameError: Int? = null,
@@ -15,9 +16,11 @@ data class ActoresViewState(
     val nacionalidad: String = "",
     @StringRes val nacionalidadError: Int? = null,
 
-    val edad:String="",
-    @StringRes val edadError: Int?=null,
+    val edad: String = "",
+    @StringRes val edadError: Int? = null,
 
     val actores: List<Actor> = listOf(),
-    ): ViewState()
+
+    val actorSeleccionado: Actor = Actor()
+) : ViewState()
 

@@ -16,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.cards.movies.CardMovies
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.AddActores
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.InfoActor
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.scaffold.CustomScaffoldWithNavMovies
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.util.isNumeric
@@ -65,13 +66,22 @@ fun ActoresScreen(
                 onNacionalidadChange = {
                     viewModel.onEvent(ActoresViewEvent.OnChangeNacionalidad(it))
                 },
-                onEdadChange ={
+                onEdadChange = {
                     if (it.isNumeric() || it.isEmpty())
                         viewModel.onEvent(ActoresViewEvent.OnChangeEdad(it))
                 },
                 addActor = {
                     viewModel.onEvent(ActoresViewEvent.AddActor)
                 }
+            )
+        }
+
+        uiState.showInfoActor -> {
+            InfoActor(
+                onDismissDialog = { viewModel.onEvent(ActoresViewEvent.HiddenDialogInfoActor) },
+                nombre = uiState.name,
+                nacionalidad =,
+                edad =
             )
         }
     }

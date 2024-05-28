@@ -24,4 +24,5 @@ abstract class BaseViewModel(application: Application): AndroidViewModel(applica
     protected fun <T> currentViewState(): T = _viewState.value as T
 
     fun <T> getState() = viewState as StateFlow<T>
+
 }

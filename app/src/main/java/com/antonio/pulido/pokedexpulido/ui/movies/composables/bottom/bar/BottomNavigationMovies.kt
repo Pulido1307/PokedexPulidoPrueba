@@ -32,8 +32,23 @@ private val itemsMovies = listOf(
     ),
     NavigationItem(
         title = "Actores",
-        icon = R.drawable.twotone_favorite_24,
+        icon = R.drawable.drama,
         route = Screens.ACTORES_SCREEN
+    ),
+    NavigationItem(
+        title = "Usuarios",
+        icon = R.drawable.usuario,
+        route = Screens.USUARIOS_SCREEN
+    ),
+    NavigationItem(
+        title = "Director",
+        icon = R.drawable.director,
+        route = Screens.DIRECTOR_SCREEN
+    ),
+    NavigationItem(
+        title = "Productora",
+        icon = R.drawable.productora,
+        route = Screens.PRODUCTORA_SCREEN
     )
 )
 

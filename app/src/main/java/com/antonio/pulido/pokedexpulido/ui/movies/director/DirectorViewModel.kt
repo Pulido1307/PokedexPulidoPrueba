@@ -22,7 +22,7 @@ class DirectorViewModel @Inject constructor(
     private var dataBase: DatabaseReference = Firebase.database.getReference("Directores")
 
     init {
-        initViewState(ActoresViewState())
+        initViewState(DirectorViewState())
         getDirectores()
     }
 
@@ -64,7 +64,7 @@ class DirectorViewModel @Inject constructor(
         val idPush = dataBase.push().key
         val state = currentViewState<DirectorViewState>()
 
-        val actor = Director(
+        val director = Director(
             id = idPush,
             nombre = state.name,
             edad = state.edad.toInt()
