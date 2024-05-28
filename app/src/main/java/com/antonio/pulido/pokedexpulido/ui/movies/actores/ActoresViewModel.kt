@@ -63,7 +63,7 @@ class ActoresViewModel @Inject constructor(
     private fun showDialogInfoActor(item: Actor) {
         updateViewState(
             currentViewState<ActoresViewState>().copy(
-                ac
+                actorSeleccionado = item
             )
         )
     }

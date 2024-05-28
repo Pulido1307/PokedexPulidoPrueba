@@ -80,8 +80,8 @@ fun ActoresScreen(
             InfoActor(
                 onDismissDialog = { viewModel.onEvent(ActoresViewEvent.HiddenDialogInfoActor) },
                 nombre = uiState.name,
-                nacionalidad =,
-                edad =
+                nacionalidad = uiState.nacionalidad,
+                edad = uiState.edad.toInt()
             )
         }
     }

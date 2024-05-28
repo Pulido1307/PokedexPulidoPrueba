@@ -38,7 +38,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
 import com.antonio.pulido.pokedexpulido.ui.composables.items.ItemInfo
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.EditarActor
+import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
@@ -66,7 +68,10 @@ fun InfoMoviesScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = modifier.height(10.dp))
-            Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Spacer(modifier = modifier.width(2.dp))
                 Box(
                     modifier = modifier
@@ -76,6 +81,26 @@ fun InfoMoviesScreen(
                         .background(PrimaryCard)
                         .clickable {
                             navController.popBackStack()
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.arrow_left_menu),
+                        contentDescription = null,
+                        modifier = modifier
+                            .size(20.dp),
+                        tint = Color.White
+                    )
+                }
+
+                Box(
+                    modifier = modifier
+                        .width(30.dp)
+                        .height(30.dp)
+                        .clip(CircleShape)
+                        .background(PrimaryCard)
+                        .clickable {
+                            viewModel.onEvent(InfoMoviesViewEvent.DeleteInfoMovie)
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -220,7 +245,12 @@ fun InfoMoviesScreen(
 //
 //            }
 
-
+            LargeCustomButton(text = "Editar") {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "id", uiState.pelicula.codigo ?: ""
+                )
+                navController.navigate(Screens.UPDATE_MOVIES_SCREEN)
+            }
         }
     }
 
@@ -235,6 +265,10 @@ fun InfoMoviesScreen(
             ) {
                 viewModel.onEvent(InfoMoviesViewEvent.EditActor)
             }
+        }
+
+        uiState.successDelete -> {
+            navController.popBackStack()
         }
     }
 }

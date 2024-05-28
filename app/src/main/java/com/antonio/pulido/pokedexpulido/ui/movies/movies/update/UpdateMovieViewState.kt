@@ -5,6 +5,9 @@ import com.antonio.pulido.pokedexpulido.viewstate.ViewState
 
 data class UpdateMovieViewState(
     val isLoading: Boolean = false,
+    val successUpdate: Boolean = false,
+
+    val codigo: String = "",
 
     val name: String = "",
     @StringRes val nameError: Int? = null,

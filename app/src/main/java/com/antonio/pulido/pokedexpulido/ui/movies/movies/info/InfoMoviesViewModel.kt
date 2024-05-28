@@ -178,6 +178,11 @@ class InfoMoviesViewModel @Inject constructor(
         val state = currentViewState<InfoMoviesViewState>()
         dataBase.child(state.id).removeValue().addOnSuccessListener {
             Toast.makeText(getApplication(), "Película borrada", Toast.LENGTH_SHORT).show()
+            updateViewState(
+                state.copy(
+                    successDelete = true
+                )
+            )
         }.addOnFailureListener {
             Toast.makeText(getApplication(), "Error ${it.message}", Toast.LENGTH_SHORT).show()
         }

@@ -9,6 +9,7 @@ object Screens {
     //MOVIES
     const val MOVIES_SCREEN = "movies_screen"
     const val INFO_MOVIES_SCREEN = "info_movies_screen"
+    const val UPDATE_MOVIES_SCREEN = "UPDATE_MOVIES_SCREEN"
     const val ACTORES_SCREEN = "actores_screen"
     const val USUARIOS_SCREEN = "usuarios_screen"
     const val PRODUCTORA_SCREEN = "productora_screen"
