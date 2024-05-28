@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.CellInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,9 +46,9 @@ fun InfoActor(
             CellInfo(title = "Nombre del actor", info = nombre)
             CellInfo(title = "Nacionalidad", info = nacionalidad)
             CellInfo(title = "Edad", info = "$edad")
-            LargeCustomButton(text = "Editar") {
-                
-            }
+//            LargeCustomButton(text = "Editar") {
+//
+//            }
             Spacer(modifier = modifier.height(8.dp))
         }
     }

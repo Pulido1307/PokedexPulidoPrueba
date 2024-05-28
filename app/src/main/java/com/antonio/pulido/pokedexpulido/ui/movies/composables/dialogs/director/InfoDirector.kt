@@ -10,12 +10,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.CellInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,13 +39,12 @@ fun InfoDirector(
             modifier = modifier
                 .padding(horizontal = 16.dp, vertical = 14.dp)
                 .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CellInfo(title = "Nombre del director", info = nombre)
             CellInfo(title = "Edad", info = "$edad")
-            LargeCustomButton(text = "Editar") {
-
-            }
+//            LargeCustomButton(text = "Editar") {
+//
+//            }
         }
     }
 }

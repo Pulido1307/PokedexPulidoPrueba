@@ -13,7 +13,7 @@ object Screens {
     const val ACTORES_SCREEN = "actores_screen"
     const val USUARIOS_SCREEN = "usuarios_screen"
     const val PRODUCTORA_SCREEN = "productora_screen"
-    const val DIRECTOR_SCREEN = "productora_screen"
+    const val DIRECTOR_SCREEN = "DIRECTOR_SCREEN"
     const val ADD_ACTUACION = "ADD_ACTUACION"
     const val ADD_DIRECCIONES = "ADD_DIRECCIONES"
     const val ADD_RESENA = "ADD_RESENA"

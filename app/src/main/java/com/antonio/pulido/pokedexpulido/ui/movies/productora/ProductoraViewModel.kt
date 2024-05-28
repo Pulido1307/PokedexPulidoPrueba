@@ -3,10 +3,7 @@ package com.antonio.pulido.pokedexpulido.ui.movies.productora
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import com.antonio.pulido.pokedexpulido.domain.entidades.Actor
 import com.antonio.pulido.pokedexpulido.domain.entidades.Productora
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,7 +18,7 @@ class ProductoraViewModel(
     private var dataBase: DatabaseReference = Firebase.database.getReference("Productora")
 
     init {
-        initViewState(ActoresViewState())
+        initViewState(ProductoraViewState())
         getProductora()
     }
 
