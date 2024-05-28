@@ -18,4 +18,5 @@ object Screens {
     const val ADD_DIRECCIONES = "ADD_DIRECCIONES"
     const val ADD_RESENA = "ADD_RESENA"
     const val ADD_APP = "ADD_APP"
+    const val ADD_PRODUCCION = "ADD_PRODUCCION"
 }

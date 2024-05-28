@@ -1,7 +1,8 @@
 package com.tec.crudbasededatos.domain.models.pivotes
 
 data class Producir(
-    val idProduccion:String? ="",
-    val clave:String? ="",
-    val codigo:String? ="",
+    val idProduccion: String? = "",
+    val clave: String? = "",
+    val codigo: String? = "",
+    val nombre: String? = ""
 )

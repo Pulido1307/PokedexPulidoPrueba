@@ -5,6 +5,7 @@ import com.antonio.pulido.pokedexpulido.domain.entidades.Director
 import com.antonio.pulido.pokedexpulido.domain.entidades.Pelicula
 import com.antonio.pulido.pokedexpulido.domain.entidades.Productora
 import com.antonio.pulido.pokedexpulido.viewstate.ViewState
+import com.tec.crudbasededatos.domain.models.pivotes.Producir
 import com.tec.crudbasededatos.domain.models.pivotes.Resenar
 import com.tec.crudbasededatos.domain.models.pivotes.Ver
 
@@ -19,6 +20,7 @@ data class InfoMoviesViewState(
     val directores: List<Director> = listOf(),
     val produtores: List<Productora> = listOf(),
     val aplicaciones: List<Ver> = listOf(),
+    val producir: List<Producir> = listOf(),
 
     val resenas: List<Resenar> = listOf(),
 

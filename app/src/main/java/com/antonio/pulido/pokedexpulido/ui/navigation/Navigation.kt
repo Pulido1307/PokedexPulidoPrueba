@@ -10,6 +10,7 @@ import com.antonio.pulido.pokedexpulido.ui.movies.director.DirectorScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.actuacion.AddActuacion
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.apps.AddAppsScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.direcciones.AddDireccionesScreen
+import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.produccion.AddProduccionScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.resena.AddResenaScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.InfoMoviesScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.list.MoviesScreen
@@ -81,6 +82,9 @@ fun Navigation(navController: NavController) {
         }
         composable(Screens.ADD_APP){
             AddAppsScreen(navController = navController)
+        }
+        composable(Screens.ADD_PRODUCCION){
+            AddProduccionScreen(navController = navController)
         }
     }
 }

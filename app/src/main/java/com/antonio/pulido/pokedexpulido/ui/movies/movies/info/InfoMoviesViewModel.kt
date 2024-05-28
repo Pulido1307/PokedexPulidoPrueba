@@ -416,6 +416,33 @@ class InfoMoviesViewModel @Inject constructor(
                         aplicaciones = ver
                     )
                 )
+                getProduccionesIn()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
+                Log.e("FirebaseError", "Error al obtener las reseñas: $error")
+            }
+
+        })
+    }
+    private fun getProduccionesIn(){
+        val state = currentViewState<InfoMoviesViewState>()
+        val producir: ArrayList<Producir> = arrayListOf()
+        dataBaseProducir.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for(prod in snapshot.children){
+                        val prodActual = prod.getValue(Producir::class.java)
+                        producir.add(prodActual?:Producir())
+                    }
+                }
+                producir.removeIf { it.codigo!=state.id }
+                updateViewState(
+                    currentViewState<InfoMoviesViewState>().copy(
+                        producir = producir
+                    )
+                )
             }
 
             override fun onCancelled(error: DatabaseError) {

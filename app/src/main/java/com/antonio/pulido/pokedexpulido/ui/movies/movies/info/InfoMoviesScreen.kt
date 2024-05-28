@@ -191,6 +191,25 @@ fun InfoMoviesScreen(
                 navController.navigate(Screens.ADD_DIRECCIONES)
             })
 
+            ItemInfo(title = "Producciones", editUnion = {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "id", uiState.pelicula.codigo ?: ""
+                )
+                navController.navigate(Screens.ADD_PRODUCCION)
+            }) {
+                uiState.producir.forEachIndexed { index, producir ->
+                    Text(
+                        text = "${index + 1}.-\nNombre: ${producir.nombre}",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
+                        ),
+                        modifier = modifier.padding(horizontal = 10.dp)
+                    )
+                    Spacer(modifier = modifier.height(4.dp))
+                }
+            }
+
 
             ItemInfo(title = "¿Donde ver?", editUnion = {
                 navController.currentBackStackEntry?.savedStateHandle?.set(
