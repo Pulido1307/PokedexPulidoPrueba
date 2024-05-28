@@ -9,6 +9,7 @@ data class ProductoraViewState(
     val isloanding: Boolean = false,
 
     val showAddProductora: Boolean = false,
+    val showInfoProductora: Boolean = false,
 
     val name: String = "",
     @StringRes val nameError: Int? = null,
@@ -17,5 +18,7 @@ data class ProductoraViewState(
     @StringRes val paisError: Int?=null,
 
     val productora: List<Productora> = listOf(),
+
+    val productoraSeleccionada: Productora = Productora()
 ): ViewState()
 

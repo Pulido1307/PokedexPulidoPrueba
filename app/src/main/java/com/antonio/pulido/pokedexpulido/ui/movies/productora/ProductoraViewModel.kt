@@ -56,7 +56,25 @@ class ProductoraViewModel(
             ProductoraViewEvent.HiddenDialogAddProductora -> setStatusAddDialog(false)
             is ProductoraViewEvent.OnChangePais -> onChangePais(event.pais)
             is ProductoraViewEvent.OnChangeName -> onChangeName(event.name)
+            is ProductoraViewEvent.ShowDialogInfoProductora -> showDialogInfoProductora(event.item)
+            ProductoraViewEvent.HiddenDialogInfoProductora -> setInfoProductora(false)
         }
+    }
+
+    private fun showDialogInfoProductora(item: Productora) {
+        updateViewState(
+            currentViewState<ProductoraViewState>().copy(
+                productoraSeleccionada = item
+            )
+        )
+    }
+
+    private fun setInfoProductora(value: Boolean) {
+        updateViewState(
+            currentViewState<ProductoraViewState>().copy(
+                showInfoProductora = value
+            )
+        )
     }
 
     private fun setStatusAddDialog(b: Boolean) {

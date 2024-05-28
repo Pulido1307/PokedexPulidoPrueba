@@ -14,7 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.cards.movies.CardMovies
+import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.InfoActor
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.productora.AddProductora
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.scaffold.CustomScaffoldWithNavMovies
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
@@ -66,6 +68,13 @@ fun ProductoraScreen(
                     addProductora = {
                         viewModel.onEvent(ProductoraViewEvent.AddProductora)
                     }
+                )
+            }
+            uiState.showInfoProductora -> {
+                InfoProductora(
+                    onDismissDialog = { viewModel.onEvent(ProductoraViewEvent.HiddenDialogInfoProductora) },
+                    nombre = uiState.productoraSeleccionada.nombre?:"",
+                    pais = uiState.productoraSeleccionada.pais?:"",
                 )
             }
         }

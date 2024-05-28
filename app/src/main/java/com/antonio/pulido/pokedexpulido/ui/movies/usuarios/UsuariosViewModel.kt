@@ -3,8 +3,11 @@ package com.antonio.pulido.pokedexpulido.ui.movies.usuarios
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import com.antonio.pulido.pokedexpulido.domain.entidades.Actor
 import com.antonio.pulido.pokedexpulido.domain.entidades.Aplicacion
 import com.antonio.pulido.pokedexpulido.domain.entidades.Usuario
+import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
+import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
 import com.antonio.pulido.pokedexpulido.ui.movies.usuarios.UsuariosViewState
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
@@ -35,7 +38,25 @@ class UsuariosViewModel @Inject constructor(
             is UsuariosViewEvent.onChangeGenero -> onChangeGenero(event.genero)
             is UsuariosViewEvent.onChangeNombre -> onChangeName(event.nombre)
             is UsuariosViewEvent.onChangePais -> onChangePais(event.pais)
+            is  UsuariosViewEvent.ShowDialogInfoUsuario -> showDialogInfoUsuario(event.item)
+            UsuariosViewEvent.HiddenDialogInfoUsuario -> setInfoUsuario(false)
         }
+    }
+
+    private fun showDialogInfoUsuario(item: Usuario) {
+        updateViewState(
+            currentViewState<UsuariosViewState>().copy(
+                usuarioSeleccionado = item
+            )
+        )
+    }
+
+    private fun setInfoUsuario(value: Boolean) {
+        updateViewState(
+            currentViewState<UsuariosViewState>().copy(
+                showInfoUsuario = value
+            )
+        )
     }
     private fun getUsuarios() {
         val usuariosLista: ArrayList<Usuario> = arrayListOf()
