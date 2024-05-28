@@ -15,4 +15,7 @@ object Screens {
     const val PRODUCTORA_SCREEN = "productora_screen"
     const val DIRECTOR_SCREEN = "productora_screen"
     const val ADD_ACTUACION = "ADD_ACTUACION"
+    const val ADD_DIRECCIONES = "ADD_DIRECCIONES"
+    const val ADD_RESENA = "ADD_RESENA"
+    const val ADD_APP = "ADD_APP"
 }

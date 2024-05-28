@@ -17,6 +17,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tec.crudbasededatos.domain.models.pivotes.Dirigir
 import com.tec.crudbasededatos.domain.models.pivotes.Producir
+import com.tec.crudbasededatos.domain.models.pivotes.Resenar
+import com.tec.crudbasededatos.domain.models.pivotes.Ver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -26,13 +28,15 @@ class InfoMoviesViewModel @Inject constructor(
 ) : BaseViewModel(application) {
     private var dataBase: DatabaseReference = Firebase.database.getReference("Peliculas")
     private var dataBaseActores: DatabaseReference = Firebase.database.getReference("Actores")
-    private var dataBaseDirector: DatabaseReference = Firebase.database.getReference("Director")
+    private var dataBaseDirector: DatabaseReference = Firebase.database.getReference("Directores")
     private var dataBaseProductores: DatabaseReference =
         Firebase.database.getReference("Productores")
     private var dataBaseActuar: DatabaseReference = Firebase.database.getReference("Actuar")
     private var dataBaseDirigir: DatabaseReference = Firebase.database.getReference("Dirigir")
     private var dataBaseProducir: DatabaseReference = Firebase.database.getReference("Producir")
     private var dataBaseResenar: DatabaseReference = Firebase.database.getReference("Resenar")
+    private var dataBaseVer: DatabaseReference = Firebase.database.getReference("Ver")
+
 
     init {
         initViewState(InfoMoviesViewState())
@@ -80,9 +84,9 @@ class InfoMoviesViewModel @Inject constructor(
         val producir = Producir(
             idProduccion = idPush,
             codigo = state.id,
-            clave = state.produtores.find { it.nombre == state.productorSeleccionado}?.clave?:""
+            clave = state.produtores.find { it.nombre == state.productorSeleccionado }?.clave ?: ""
         )
-        dataBaseProducir.child(idPush?:"").setValue(producir).addOnSuccessListener {
+        dataBaseProducir.child(idPush ?: "").setValue(producir).addOnSuccessListener {
             Toast.makeText(getApplication(), "¡Nuevo Productor agregado!", Toast.LENGTH_LONG).show()
             updateViewState(
                 state.copy(
@@ -102,10 +106,10 @@ class InfoMoviesViewModel @Inject constructor(
         val dirigir = Dirigir(
             noDirigida = idPush,
             codigo = state.id,
-            id = state.directores.find { it.nombre == state.directorSeleccionado}?.id?:""
+            id = state.directores.find { it.nombre == state.directorSeleccionado }?.id ?: ""
         )
 
-        dataBaseDirigir.child(idPush?:"").setValue(dirigir).addOnSuccessListener {
+        dataBaseDirigir.child(idPush ?: "").setValue(dirigir).addOnSuccessListener {
             Toast.makeText(getApplication(), "¡Nuevo Directo agregado!", Toast.LENGTH_LONG).show()
             updateViewState(
                 state.copy(
@@ -125,11 +129,11 @@ class InfoMoviesViewModel @Inject constructor(
 
         val actuar = Actuar(
             idActuar = idPush,
-            idActor = state.actores.find { it.nombre == state.actorSeleccionado }?.dni?:"",
+            idActor = state.actores.find { it.nombre == state.actorSeleccionado }?.dni ?: "",
             codigo = state.id
         )
 
-        dataBaseActuar.child(idPush ?:"").setValue(actuar).addOnSuccessListener {
+        dataBaseActuar.child(idPush ?: "").setValue(actuar).addOnSuccessListener {
             Toast.makeText(getApplication(), "¡Nuevo Actor agregado!", Toast.LENGTH_LONG).show()
             updateViewState(
                 state.copy(
@@ -150,6 +154,7 @@ class InfoMoviesViewModel @Inject constructor(
             )
         )
     }
+
     private fun onChangeProductorText(text: String) {
         updateViewState(
             currentViewState<InfoMoviesViewState>().copy(
@@ -157,6 +162,7 @@ class InfoMoviesViewModel @Inject constructor(
             )
         )
     }
+
     private fun onChangeDirectorText(text: String) {
         updateViewState(
             currentViewState<InfoMoviesViewState>().copy(
@@ -314,30 +320,31 @@ class InfoMoviesViewModel @Inject constructor(
                 )
                 getDirecciones()
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(getApplication(), "Error ${error}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun getDirecciones(){
+    private fun getDirecciones() {
         val state = currentViewState<InfoMoviesViewState>()
         val directores = state.directores
         val direcciones: ArrayList<Dirigir> = arrayListOf()
         val directoresInvolucrados: ArrayList<Director> = arrayListOf()
-        dataBaseDirigir.addValueEventListener(object : ValueEventListener{
+        dataBaseDirigir.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    for (direccion in snapshot.children){
+                    for (direccion in snapshot.children) {
                         val direccionActual = direccion.getValue(Dirigir::class.java)
-                        if(state.id == direccionActual?.codigo){
+                        if (state.id == direccionActual?.codigo) {
                             direcciones.add(direccionActual ?: Dirigir())
                         }
                     }
                 }
 
-                for (director in directores){
-                    if (direcciones.any { it.id == director.id}){
+                for (director in directores) {
+                    if (direcciones.any { it.id == director.id }) {
                         directoresInvolucrados.add(director)
                     }
                 }
@@ -347,7 +354,8 @@ class InfoMoviesViewModel @Inject constructor(
                         directoresInvolucrados = directoresInvolucrados
                     )
                 )
-                getDirecciones()
+                Log.i("TAG", "onDataChange: ${direcciones.toString()}")
+                getResenas()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -356,22 +364,83 @@ class InfoMoviesViewModel @Inject constructor(
         })
     }
 
-    private fun getProducidas(){
+    private fun getResenas() {
+        val state = currentViewState<InfoMoviesViewState>()
+        val resenas: ArrayList<Resenar> = arrayListOf()
+        dataBaseResenar.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (resena in snapshot.children) {
+                        val resenaActual = resena.getValue(Resenar::class.java)
+                        if (resenaActual != null) {
+                            resenas.add(resenaActual)
+                            Log.d("FirebaseData", "Resena obtenida: $resenaActual")
+                        } else {
+                            Log.d("FirebaseData", "Resena es null")
+                        }
+                    }
+                } else {
+                    Log.d("FirebaseData", "Snapshot no existe")
+                }
+
+                resenas.removeIf { it.codigo!=state.id }
+                updateViewState(
+                    state.copy(
+                        resenas = resenas
+                    )
+                )
+                getAplicacionesList()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
+                Log.e("FirebaseError", "Error al obtener las reseñas: $error")
+            }
+        })
+    }
+    private fun getAplicacionesList(){
+        val state = currentViewState<InfoMoviesViewState>()
+        val ver: ArrayList<Ver> = arrayListOf()
+        dataBaseVer.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for(vista in snapshot.children){
+                        val verActual = vista.getValue(Ver::class.java)
+                        ver.add(verActual?:Ver())
+                    }
+                }
+                ver.removeIf { it.codigo!=state.id }
+
+                updateViewState(
+                    currentViewState<InfoMoviesViewState>().copy(
+                        aplicaciones = ver
+                    )
+                )
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(getApplication(), "Error $error", Toast.LENGTH_SHORT).show()
+                Log.e("FirebaseError", "Error al obtener las reseñas: $error")
+            }
+
+        })
+    }
+    private fun getProducidas() {
         val state = currentViewState<InfoMoviesViewState>()
         val produtores = state.produtores
         val producciones: ArrayList<Producir> = arrayListOf()
         val produccionesInvolucradas: ArrayList<Productora> = arrayListOf()
-        dataBaseProducir.addValueEventListener(object : ValueEventListener{
+        dataBaseProducir.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(produccion in snapshot.children){
+                if (snapshot.exists()) {
+                    for (produccion in snapshot.children) {
                         val produccionActual = produccion.getValue(Producir::class.java)
-                        if(state.id == produccionActual?.codigo){
-                            producciones.add(produccionActual?: Producir())
+                        if (state.id == produccionActual?.codigo) {
+                            producciones.add(produccionActual ?: Producir())
                         }
                     }
-                    for (productor in produtores){
-                        if(producciones.any { it.clave == productor.clave }){
+                    for (productor in produtores) {
+                        if (producciones.any { it.clave == productor.clave }) {
                             produccionesInvolucradas.add(productor)
                         }
                     }

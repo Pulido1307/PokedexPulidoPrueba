@@ -56,9 +56,7 @@ fun InfoMoviesScreen(
     }
 
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
     ) {
         Column(
             modifier = modifier
@@ -68,8 +66,7 @@ fun InfoMoviesScreen(
         ) {
             Spacer(modifier = modifier.height(10.dp))
             Row(
-                modifier = modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
                 Box(
@@ -80,14 +77,12 @@ fun InfoMoviesScreen(
                         .background(PrimaryCard)
                         .clickable {
                             navController.popBackStack()
-                        },
-                    contentAlignment = Alignment.Center
+                        }, contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.arrow_left_menu),
                         contentDescription = null,
-                        modifier = modifier
-                            .size(20.dp),
+                        modifier = modifier.size(20.dp),
                         tint = Color.White
                     )
                 }
@@ -100,14 +95,12 @@ fun InfoMoviesScreen(
                         .background(PrimaryCard)
                         .clickable {
                             viewModel.onEvent(InfoMoviesViewEvent.DeleteInfoMovie)
-                        },
-                    contentAlignment = Alignment.Center
+                        }, contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_restore_from_trash_24),
                         contentDescription = null,
-                        modifier = modifier
-                            .size(20.dp),
+                        modifier = modifier.size(20.dp),
                         tint = Color.White
                     )
                 }
@@ -125,8 +118,7 @@ fun InfoMoviesScreen(
             )
             Spacer(modifier = modifier.height(16.dp))
             Divider(
-                thickness = 2.dp,
-                color = Secondary
+                thickness = 2.dp, color = Secondary
             )
             Spacer(modifier = modifier.height(16.dp))
 
@@ -142,72 +134,83 @@ fun InfoMoviesScreen(
 
             CellInfo(title = "Genero", info = "${uiState.pelicula.genero}")
 
-            ItemInfo(
-                title = "Actores", content = {
-                    uiState.actoresInvolucrados.forEachIndexed { index, actor ->
+            ItemInfo(title = "Actores", content = {
+                uiState.actoresInvolucrados.forEachIndexed { index, actor ->
+                    Text(
+                        text = "${index + 1}.- Nombre: ${actor.nombre}\n\t\tNacionalidad: ${actor.nacionalidad}\n\t\tEdad: ${actor.edad}",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
+                        ),
+                        modifier = modifier.padding(horizontal = 10.dp)
+                    )
+                    Spacer(modifier = modifier.height(4.dp))
+                }
+            }, editUnion = {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "id", uiState.pelicula.codigo ?: ""
+                )
+                navController.navigate(Screens.ADD_ACTUACION)
+            })
+
+            ItemInfo(title = "Reseñas",
+                content = {
+                    uiState.resenas.forEachIndexed { index, resenar ->
                         Text(
-                            text =
-                            "${index + 1}.- Nombre: ${actor.nombre}\n\t\tNacionalidad: ${actor.nacionalidad}\n\t\tEdad: ${actor.edad}",
+                            text = "Reseña # ${index + 1}.-\nNombre:${resenar.nombreUsuario}\n${resenar.mensaje}",
                             textAlign = TextAlign.Start,
                             style = MaterialTheme.typography.titleLarge.copy(
-                                color = Secondary,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Light
+                                color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
                             ),
                             modifier = modifier.padding(horizontal = 10.dp)
                         )
-                        Spacer(modifier = modifier.height(4.dp))
                     }
                 },
                 editUnion = {
                     navController.currentBackStackEntry?.savedStateHandle?.set(
                         "id", uiState.pelicula.codigo ?: ""
                     )
-                    navController.navigate(Screens.ADD_ACTUACION)
-                }
-            )
+                    navController.navigate(Screens.ADD_RESENA)
+                })
 
-//            ItemInfo(
-//                title = "Directores",
-//                content = {
-//                    uiState.directoresInvolucrados.forEachIndexed { index, director ->
-//                        Text(
-//                            text =
-//                            "${index + 1}.- Nombre: ${director.nombre}\n\t\tEdad: ${director.edad}",
-//                            textAlign = TextAlign.Start,
-//                            style = MaterialTheme.typography.titleLarge.copy(
-//                                color = Secondary,
-//                                fontSize = 18.sp,
-//                                fontWeight = FontWeight.Light
-//                            ),
-//                            modifier = modifier.padding(horizontal = 10.dp)
-//                        )
-//                        Spacer(modifier = modifier.height(4.dp))
-//                    }
-//                }
-//            )
-//
-//            ItemInfo(
-//                title = "Productores", content = {
-//                    uiState.produccionesInvolucradas.forEachIndexed { index, productor ->
-//                        Text(
-//                            text =
-//                            "${index + 1}.- Nombre: ${productor.nombre}\n\t\tPaís: ${productor.pais}",
-//                            textAlign = TextAlign.Start,
-//                            style = MaterialTheme.typography.titleLarge.copy(
-//                                color = Secondary,
-//                                fontSize = 18.sp,
-//                                fontWeight = FontWeight.Light
-//                            ),
-//                            modifier = modifier.padding(horizontal = 10.dp)
-//                        )
-//                        Spacer(modifier = modifier.height(4.dp))
-//                    }
-//                }
-//            )
-//            ItemInfo(title = "Reseñas") {
-//
-//            }
+            ItemInfo(title = "Directores", content = {
+                uiState.directoresInvolucrados.forEachIndexed { index, director ->
+                    Text(
+                        text = "${index + 1}.- Nombre: ${director.nombre}\n\t\tEdad: ${director.edad}",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
+                        ),
+                        modifier = modifier.padding(horizontal = 10.dp)
+                    )
+                    Spacer(modifier = modifier.height(4.dp))
+                }
+            }, editUnion = {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "id", uiState.pelicula.codigo ?: ""
+                )
+                navController.navigate(Screens.ADD_DIRECCIONES)
+            })
+
+
+            ItemInfo(title = "¿Donde ver?", editUnion = {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    "id", uiState.pelicula.codigo ?: ""
+                )
+                navController.navigate(Screens.ADD_APP)
+            }) {
+                uiState.aplicaciones.forEachIndexed { index, ver ->
+                    Text(
+                        text = "${index + 1}.-\nNombre: ${ver.nombre}",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
+                        ),
+                        modifier = modifier.padding(horizontal = 10.dp)
+                    )
+                    Spacer(modifier = modifier.height(4.dp))
+                }
+            }
 
             LargeCustomButton(text = "Editar") {
                 navController.currentBackStackEntry?.savedStateHandle?.set(
@@ -229,26 +232,16 @@ fun InfoMoviesScreen(
 @Composable
 fun CellInfo(modifier: Modifier = Modifier, title: String, info: String) {
     Text(
-        text = title,
-        textAlign = TextAlign.Start,
-        style = MaterialTheme.typography.titleLarge.copy(
-            color = Secondary,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Normal
-        ),
-        modifier = modifier.fillMaxWidth()
+        text = title, textAlign = TextAlign.Start, style = MaterialTheme.typography.titleLarge.copy(
+            color = Secondary, fontSize = 20.sp, fontWeight = FontWeight.Normal
+        ), modifier = modifier.fillMaxWidth()
     )
     Spacer(modifier = modifier.height(8.dp))
 
     Text(
-        text = info,
-        textAlign = TextAlign.Start,
-        style = MaterialTheme.typography.titleLarge.copy(
-            color = Secondary,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Light
-        ),
-        modifier = modifier.padding(horizontal = 10.dp)
+        text = info, textAlign = TextAlign.Start, style = MaterialTheme.typography.titleLarge.copy(
+            color = Secondary, fontSize = 18.sp, fontWeight = FontWeight.Light
+        ), modifier = modifier.padding(horizontal = 10.dp)
     )
     Spacer(modifier = modifier.height(8.dp))
 }
