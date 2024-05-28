@@ -40,7 +40,6 @@ import com.antonio.pulido.pokedexpulido.R
 import com.antonio.pulido.pokedexpulido.ui.composables.items.ItemInfo
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
-import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 
 @Composable
@@ -74,7 +73,7 @@ fun InfoMoviesScreen(
                         .width(30.dp)
                         .height(30.dp)
                         .clip(CircleShape)
-                        .background(PrimaryCard)
+                        .background(Secondary)
                         .clickable {
                             navController.popBackStack()
                         }, contentAlignment = Alignment.Center
@@ -92,7 +91,7 @@ fun InfoMoviesScreen(
                         .width(30.dp)
                         .height(30.dp)
                         .clip(CircleShape)
-                        .background(PrimaryCard)
+                        .background(Secondary)
                         .clickable {
                             viewModel.onEvent(InfoMoviesViewEvent.DeleteInfoMovie)
                         }, contentAlignment = Alignment.Center

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -52,15 +51,16 @@ fun AddMovies(
     addMovie: () -> Unit
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
-
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+    val sheetHeight = (screenHeight * 0.85f)
 
     ModalBottomSheet(
         onDismissRequest = onDismissDialog,
-        //sheetMaxWidth = 100.dp,
         sheetState = modalBottomSheetState,
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(0.dp, (LocalConfiguration.current.screenHeightDp * 0.7f).dp),
+            .height(sheetHeight),
         containerColor = Color.White
     ) {
         Column(
