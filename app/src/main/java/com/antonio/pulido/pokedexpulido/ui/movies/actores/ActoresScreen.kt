@@ -45,7 +45,7 @@ fun ActoresScreen(
                 items(uiState.actores) {
                     AnimatedVisibility(visible = true) {
                         CardMovies(name = it.nombre ?: "") {
-
+                            viewModel.onEvent(ActoresViewEvent.ShowDialogInfoActor(it))
                         }
                     }
                 }
@@ -79,9 +79,9 @@ fun ActoresScreen(
         uiState.showInfoActor -> {
             InfoActor(
                 onDismissDialog = { viewModel.onEvent(ActoresViewEvent.HiddenDialogInfoActor) },
-                nombre = uiState.name,
-                nacionalidad = uiState.nacionalidad,
-                edad = uiState.edad.toInt()
+                nombre = uiState.actorSeleccionado.nombre?:"",
+                nacionalidad = uiState.actorSeleccionado.nacionalidad?:"",
+                edad = uiState.actorSeleccionado.edad?.toInt()?:0
             )
         }
     }

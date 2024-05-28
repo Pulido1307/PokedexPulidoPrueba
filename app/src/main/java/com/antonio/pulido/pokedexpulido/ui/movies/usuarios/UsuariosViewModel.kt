@@ -3,12 +3,7 @@ package com.antonio.pulido.pokedexpulido.ui.movies.usuarios
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import com.antonio.pulido.pokedexpulido.domain.entidades.Actor
-import com.antonio.pulido.pokedexpulido.domain.entidades.Aplicacion
 import com.antonio.pulido.pokedexpulido.domain.entidades.Usuario
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
-import com.antonio.pulido.pokedexpulido.ui.movies.usuarios.UsuariosViewState
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,7 +41,8 @@ class UsuariosViewModel @Inject constructor(
     private fun showDialogInfoUsuario(item: Usuario) {
         updateViewState(
             currentViewState<UsuariosViewState>().copy(
-                usuarioSeleccionado = item
+                usuarioSeleccionado = item,
+                showInfoUsuario = true
             )
         )
     }

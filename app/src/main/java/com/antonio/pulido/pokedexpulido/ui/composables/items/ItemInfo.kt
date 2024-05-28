@@ -32,12 +32,7 @@ import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
 fun ItemInfo(
     modifier: Modifier = Modifier,
     title: String,
-    showEdit: () -> Unit,
-    editActor: () -> Unit,
-    onDissmiDialog: () -> Unit,
-    listOptions: List<String>,
-    onChangeText: (String) -> Unit,
-    titleDialog: String,
+    editUnion: () -> Unit,
     content: @Composable () -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -77,7 +72,7 @@ fun ItemInfo(
                     modifier = modifier
                         .size(30.dp)
                         .clickable {
-                            showEdit()
+                            editUnion()
                         }
                 )
             }

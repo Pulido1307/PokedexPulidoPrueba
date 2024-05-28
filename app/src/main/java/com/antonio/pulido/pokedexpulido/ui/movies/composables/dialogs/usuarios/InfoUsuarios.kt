@@ -20,7 +20,7 @@ import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.CellInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InfoActor(
+fun InfoUsuario(
     modifier: Modifier = Modifier,
     onDismissDialog: () -> Unit,
     nombre: String,

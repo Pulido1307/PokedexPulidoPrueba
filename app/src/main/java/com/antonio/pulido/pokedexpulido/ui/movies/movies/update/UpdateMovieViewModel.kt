@@ -67,8 +67,8 @@ class UpdateMovieViewModel @Inject constructor(
             "nombre" to state.name,
             "idioma" to state.idioma,
             "descripcion" to state.descripcion,
-            "duracion" to state.duracion,
-            "year" to state.year,
+            "duracion" to state.duracion.toInt(),
+            "year" to state.year.toInt(),
             "genero" to state.genero
         )
 

@@ -14,4 +14,5 @@ object Screens {
     const val USUARIOS_SCREEN = "usuarios_screen"
     const val PRODUCTORA_SCREEN = "productora_screen"
     const val DIRECTOR_SCREEN = "productora_screen"
+    const val ADD_ACTUACION = "ADD_ACTUACION"
 }

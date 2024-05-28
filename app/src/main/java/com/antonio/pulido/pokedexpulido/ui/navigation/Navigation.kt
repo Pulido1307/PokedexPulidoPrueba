@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.director.DirectorScreen
+import com.antonio.pulido.pokedexpulido.ui.movies.movies.adds.actuacion.AddActuacion
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.info.InfoMoviesScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.list.MoviesScreen
 import com.antonio.pulido.pokedexpulido.ui.movies.movies.update.UpdateMovieScreen
@@ -65,6 +66,9 @@ fun Navigation(navController: NavController) {
 
         composable(Screens.UPDATE_MOVIES_SCREEN){
             UpdateMovieScreen(navController = navController)
+        }
+        composable(Screens.ADD_ACTUACION){
+            AddActuacion(navController = navController)
         }
     }
 }

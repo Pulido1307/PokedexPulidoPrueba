@@ -23,6 +23,7 @@ import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.textfields.GenericDropDown
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.textfields.GenericTextField
+import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.util.isNumeric
 
 @Composable
@@ -114,6 +115,14 @@ fun UpdateMovieScreen(
             LargeCustomButton(text = "Actualizar") {
                 viewModel.onEvent(UpdateMovieViewEvent.UpdateMovie)
             }
+        }
+    }
+
+    when{
+        uiState.successUpdate->{
+//            navController.popBackStack()
+            navController.backQueue.clear()
+            navController.navigate(Screens.MOVIES_SCREEN)
         }
     }
 }

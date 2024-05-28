@@ -3,10 +3,7 @@ package com.antonio.pulido.pokedexpulido.ui.movies.director
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import com.antonio.pulido.pokedexpulido.domain.entidades.Actor
 import com.antonio.pulido.pokedexpulido.domain.entidades.Director
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
 import com.antonio.pulido.pokedexpulido.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -65,7 +62,8 @@ class DirectorViewModel @Inject constructor(
     private fun showDialogInfoDirector(item: Director) {
         updateViewState(
             currentViewState<DirectorViewState>().copy(
-                directorSeleccionado = item
+                directorSeleccionado = item,
+                showInfoDirector = true
             )
         )
     }

@@ -14,12 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewEvent
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewModel
-import com.antonio.pulido.pokedexpulido.ui.movies.actores.ActoresViewState
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.cards.movies.CardMovies
-import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.AddActores
-import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.InfoActor
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.director.AddDirector
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.director.InfoDirector
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.scaffold.CustomScaffoldWithNavMovies
@@ -50,7 +45,7 @@ fun DirectorScreen(
                 items(uiState.directores) {
                     AnimatedVisibility(visible = true) {
                         CardMovies(name = it.nombre ?: "") {
-
+                            viewModel.onEvent(DirectorViewEvent.ShowDialogInfoDirector(it))
                         }
                     }
                 }

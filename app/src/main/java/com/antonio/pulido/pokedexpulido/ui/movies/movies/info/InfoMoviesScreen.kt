@@ -39,7 +39,6 @@ import androidx.navigation.NavController
 import com.antonio.pulido.pokedexpulido.R
 import com.antonio.pulido.pokedexpulido.ui.composables.items.ItemInfo
 import com.antonio.pulido.pokedexpulido.ui.movies.composables.buttons.LargeCustomButton
-import com.antonio.pulido.pokedexpulido.ui.movies.composables.dialogs.actors.EditarActor
 import com.antonio.pulido.pokedexpulido.ui.navigation.Screens
 import com.antonio.pulido.pokedexpulido.ui.theme.PrimaryCard
 import com.antonio.pulido.pokedexpulido.ui.theme.Secondary
@@ -72,7 +71,7 @@ fun InfoMoviesScreen(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Spacer(modifier = modifier.width(2.dp))
+
                 Box(
                     modifier = modifier
                         .width(30.dp)
@@ -105,7 +104,7 @@ fun InfoMoviesScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.arrow_left_menu),
+                        painter = painterResource(id = R.drawable.baseline_restore_from_trash_24),
                         contentDescription = null,
                         modifier = modifier
                             .size(20.dp),
@@ -160,87 +159,52 @@ fun InfoMoviesScreen(
                         Spacer(modifier = modifier.height(4.dp))
                     }
                 },
-                listOptions = uiState.actores.map { it.nombre ?: "" },
-                onChangeText = {
-                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeActorText(it))
-                },
-                onDissmiDialog = {
-                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditActor)
-                },
-                showEdit = {
-                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditActor)
-                },
-                titleDialog = "Actor",
-                editActor = {
-                    viewModel.onEvent(InfoMoviesViewEvent.EditActor)
+                editUnion = {
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        "id", uiState.pelicula.codigo ?: ""
+                    )
+                    navController.navigate(Screens.ADD_ACTUACION)
                 }
             )
 
-            ItemInfo(
-                title = "Directores", content = {
-                    uiState.directoresInvolucrados.forEachIndexed { index, director ->
-                        Text(
-                            text =
-                            "${index + 1}.- Nombre: ${director.nombre}\n\t\tEdad: ${director.edad}",
-                            textAlign = TextAlign.Start,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                color = Secondary,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Light
-                            ),
-                            modifier = modifier.padding(horizontal = 10.dp)
-                        )
-                        Spacer(modifier = modifier.height(4.dp))
-                    }
-                },
-                listOptions = uiState.directores.map { it.nombre ?: "" },
-                onChangeText = {
-                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeDirectorText(it))
-                },
-                onDissmiDialog = {
-                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditDirector)
-                },
-                showEdit = {
-                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditDirector)
-                },
-                titleDialog = "Director",
-                editActor = {
-                    viewModel.onEvent(InfoMoviesViewEvent.EditDirector)
-                }
-            )
-
-            ItemInfo(
-                title = "Productores", content = {
-                    uiState.produccionesInvolucradas.forEachIndexed { index, productor ->
-                        Text(
-                            text =
-                            "${index + 1}.- Nombre: ${productor.nombre}\n\t\tPaís: ${productor.pais}",
-                            textAlign = TextAlign.Start,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                color = Secondary,
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight.Light
-                            ),
-                            modifier = modifier.padding(horizontal = 10.dp)
-                        )
-                        Spacer(modifier = modifier.height(4.dp))
-                    }
-                },
-                listOptions = uiState.produtores.map { it.nombre ?: "" },
-                onChangeText = {
-                    viewModel.onEvent(InfoMoviesViewEvent.OnChangeProductorText(it))
-                },
-                onDissmiDialog = {
-                    viewModel.onEvent(InfoMoviesViewEvent.HiddenEditPrdoctor)
-                },
-                showEdit = {
-                    viewModel.onEvent(InfoMoviesViewEvent.ShowEditdProductor)
-                },
-                titleDialog = "Productores",
-                editActor = {
-                    viewModel.onEvent(InfoMoviesViewEvent.EditProductor)
-                }
-            )
+//            ItemInfo(
+//                title = "Directores",
+//                content = {
+//                    uiState.directoresInvolucrados.forEachIndexed { index, director ->
+//                        Text(
+//                            text =
+//                            "${index + 1}.- Nombre: ${director.nombre}\n\t\tEdad: ${director.edad}",
+//                            textAlign = TextAlign.Start,
+//                            style = MaterialTheme.typography.titleLarge.copy(
+//                                color = Secondary,
+//                                fontSize = 18.sp,
+//                                fontWeight = FontWeight.Light
+//                            ),
+//                            modifier = modifier.padding(horizontal = 10.dp)
+//                        )
+//                        Spacer(modifier = modifier.height(4.dp))
+//                    }
+//                }
+//            )
+//
+//            ItemInfo(
+//                title = "Productores", content = {
+//                    uiState.produccionesInvolucradas.forEachIndexed { index, productor ->
+//                        Text(
+//                            text =
+//                            "${index + 1}.- Nombre: ${productor.nombre}\n\t\tPaís: ${productor.pais}",
+//                            textAlign = TextAlign.Start,
+//                            style = MaterialTheme.typography.titleLarge.copy(
+//                                color = Secondary,
+//                                fontSize = 18.sp,
+//                                fontWeight = FontWeight.Light
+//                            ),
+//                            modifier = modifier.padding(horizontal = 10.dp)
+//                        )
+//                        Spacer(modifier = modifier.height(4.dp))
+//                    }
+//                }
+//            )
 //            ItemInfo(title = "Reseñas") {
 //
 //            }
@@ -255,20 +219,9 @@ fun InfoMoviesScreen(
     }
 
     when {
-        uiState.showEditActor -> {
-            EditarActor(
-                onDismissDialog = { viewModel.onEvent(InfoMoviesViewEvent.HiddenEditActor) },
-                options = uiState.actores.map { it.nombre ?: "" },
-                onTextChange = { viewModel.onEvent(InfoMoviesViewEvent.OnChangeActorText(it)) },
-                value = uiState.actorSeleccionado,
-                title = "Actor"
-            ) {
-                viewModel.onEvent(InfoMoviesViewEvent.EditActor)
-            }
-        }
-
         uiState.successDelete -> {
-            navController.popBackStack()
+            navController.backQueue.clear()
+            navController.navigate(Screens.MOVIES_SCREEN)
         }
     }
 }

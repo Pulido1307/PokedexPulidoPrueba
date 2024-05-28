@@ -46,7 +46,7 @@ private val itemsMovies = listOf(
         route = Screens.DIRECTOR_SCREEN
     ),
     NavigationItem(
-        title = "Productora",
+        title = "Productor",
         icon = R.drawable.productora,
         route = Screens.PRODUCTORA_SCREEN
     )
